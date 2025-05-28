@@ -86,7 +86,7 @@ Content-Type: application/json
 ###
 
 ### Get single book by ID (replace with actual ID from create response)
-GET {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+GET {{baseUrl}}/api/books/683775eb4d007c3ac9d22f6b
 
 ###
 
@@ -101,7 +101,7 @@ GET {{baseUrl}}/api/books/507f1f77bcf86cd799439011
 ###
 
 ### Update a book (replace with actual ID)
-PUT {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+PUT {{baseUrl}}/api/books/683775eb4d007c3ac9d22f6b
 Content-Type: application/json
 
 {
@@ -118,7 +118,7 @@ Content-Type: application/json
 ###
 
 ### Update with validation error (should return 400)
-PUT {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+PUT {{baseUrl}}/api/books/683775eb4d007c3ac9d22f6b
 Content-Type: application/json
 
 {
@@ -142,7 +142,7 @@ Content-Type: application/json
 ###
 
 ### Delete a book (replace with actual ID)
-DELETE {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+DELETE {{baseUrl}}/api/books/683775eb4d007c3ac9d22f6b
 
 ###
 
