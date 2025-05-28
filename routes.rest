@@ -1,0 +1,212 @@
+### Books API Testing File
+### Update the base URL with your deployed URL
+
+# @baseUrl = http://localhost:5000
+@baseUrl = https://cse341-project1-cb11.onrender.com
+
+### Test API is running
+GET {{baseUrl}}/
+
+###
+
+### Get all books
+GET {{baseUrl}}/api/books
+
+###
+
+### Create a new book (Valid data)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "genre": "Fiction",
+  "pages": 180,
+  "published": "1925-04-10",
+  "purchase": "https://example.com/gatsby"
+}
+
+###
+
+### Create book with all fields
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "To Kill a Mockingbird",
+  "author": "Harper Lee",
+  "genre": "Fiction",
+  "pages": 376,
+  "published": "1960-07-11",
+  "purchase": "https://example.com/mockingbird",
+  "languages": ["English"],
+  "publisher": "J.B. Lippincott & Co."
+}
+
+###
+
+### Test validation - Missing required fields (should return 400)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "pages": 100,
+  "published": "2023-01-01"
+}
+
+###
+
+### Test validation - Invalid data types (should return 400)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Test Book",
+  "author": "Test Author",
+  "genre": "Fiction",
+  "pages": "not-a-number",
+  "purchase": "invalid-url",
+  "published": "invalid-date"
+}
+
+###
+
+### Test validation - Empty required fields (should return 400)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "   ",
+  "genre": "",
+  "pages": 150
+}
+
+###
+
+### Get single book by ID (replace with actual ID from create response)
+GET {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+
+###
+
+### Test invalid ObjectId format (should return 400)
+GET {{baseUrl}}/api/books/invalid-id-format
+
+###
+
+### Test non-existent book (should return 404)
+GET {{baseUrl}}/api/books/507f1f77bcf86cd799439011
+
+###
+
+### Update a book (replace with actual ID)
+PUT {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+Content-Type: application/json
+
+{
+  "title": "The Great Gatsby - Updated Edition",
+  "author": "F. Scott Fitzgerald",
+  "genre": "Classic Fiction",
+  "pages": 200,
+  "published": "1925-04-10",
+  "purchase": "https://example.com/gatsby-updated",
+  "languages": ["English", "Spanish"],
+  "publisher": "Updated Publisher"
+}
+
+###
+
+### Update with validation error (should return 400)
+PUT {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": "F. Scott Fitzgerald",
+  "genre": "Fiction"
+}
+
+###
+
+### Update non-existent book (should return 404)
+PUT {{baseUrl}}/api/books/507f1f77bcf86cd799439011
+Content-Type: application/json
+
+{
+  "title": "Non-existent Book",
+  "author": "Unknown Author",
+  "genre": "Fiction"
+}
+
+###
+
+### Delete a book (replace with actual ID)
+DELETE {{baseUrl}}/api/books/6834fcfec5842441cc5776e8
+
+###
+
+### Delete non-existent book (should return 404)
+DELETE {{baseUrl}}/api/books/507f1f77bcf86cd799439011
+
+###
+
+### Delete with invalid ID format (should return 400)
+DELETE {{baseUrl}}/api/books/invalid-id
+
+###
+
+### Additional test cases for edge scenarios
+
+### Create book with minimal required fields only
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Minimal Book",
+  "author": "Simple Author",
+  "genre": "Test"
+}
+
+###
+
+### Create book with valid optional fields
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Complete Book Example",
+  "author": "Full Author Name",
+  "genre": "Educational",
+  "pages": 250,
+  "published": "2023-12-01",
+  "purchase": "https://bookstore.example.com/complete-book",
+  "languages": ["English", "French", "German"],
+  "publisher": "Educational Publishers Inc."
+}
+
+###
+
+### Test pages validation - negative number (should return 400)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Invalid Pages Book",
+  "author": "Test Author",
+  "genre": "Test",
+  "pages": -50
+}
+
+###
+
+### Test pages validation - zero (should return 400)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Zero Pages Book",
+  "author": "Test Author",
+  "genre": "Test",
+  "pages": 0
+}
